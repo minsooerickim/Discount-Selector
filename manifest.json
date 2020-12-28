@@ -1,0 +1,24 @@
+  
+{
+    "manifest_version": 2,
+    "name": "Discount Selector",
+    "version": "0.0.1",
+    "content_scripts": [
+        {
+            "matches": [
+                "https://www.amazon.com/*",
+                "https://www.ebay.com/*"
+            ],
+            "js": [
+                "jquery-3.5.1.js", 
+                "content.js"
+            ]
+        }
+    ],
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "browser_action": {
+        "default_icon": "logo.png"
+    }
+}
