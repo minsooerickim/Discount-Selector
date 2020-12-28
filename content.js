@@ -5,31 +5,56 @@ $(function() {
     //CURRENT/DISCOUNTED prices of discounted items
     var currentPrice = [];
     j = 0;
-    //index values of each item
-    var index = [];
+    //dataAsin(attribute) values of each item
+    var dataAsin = [];
     k = 0;
+    //price difference 
+    var priceDiff = [];
+
+    //list w/ no $ signs
+    var intOrgPrice = [];
+    var intDiscPrice = [];
     
+    //getting values for items, currentPrice, index lists
     $('span.a-price.a-text-price span.a-offscreen').each(function(){
         items[i++] = $(this).text();
         currentPrice[j++] = $(this).parent().prev('span.a-price').find('span.a-offscreen').text();
-        index[k++] = $(this).parents('div[data-asin]').attr('data-asin');
+        dataAsin[k++] = $(this).parents('div[data-asin]').attr('data-asin');
     });
-    console.log(items);
-    console.log(currentPrice);
-    console.log(index);
 
-    
-    
-    /*
-        item1 org. price = currentPrice[0];
-        item1 cur. price = items[0];
-        price different = items[0] - currentPrice[0];
-    */
+    //getting price diff list
+    for (var i = 0; i < items.length; i++) {
+        priceDiff[i] = items[i] - currentPrice[i];
+    }
 
-    //index of the top item
-    var topItemIndex = document.querySelector('[data-index="2"]').getAttribute('data-index');
+    //getting rid of $ signs and gettig values for priceDiff[]
+    for (var i = 0; i < items.length; i++) {
+        intOrgPrice[i] = items[i].substring(1);
+        intDiscPrice[i] = currentPrice[i].substring(1);
+        priceDiff[i] = intOrgPrice[i] - intDiscPrice[i];
+    }
+
+    //reverse sorting priceDiff
+    var sortedPriceDiff = [...priceDiff];
+    var reverseSortedPriceDiff = [];
+
+    sortedPriceDiff.sort(function(a, b) {
+        return a - b;
+    });
     
-    console.log(topItemIndex);
+    reverseSortedPriceDiff = sortedPriceDiff.reverse();
+
+    console.log(priceDiff);
+    console.log(reverseSortedPriceDiff);
+    console.log(dataAsin);
+
+    var l = (document.getElementsByClassName('sg-col-4-of-12')[1]);
+    var firstDataAsinVal = l.getAttribute('data-asin');
+
+    for (var i = items.length - 1; i >= 0; i--) {
+        $('div[data-asin="' + dataAsin[i] + '"]').insertBefore('div[data-asin="' + firstDataAsinVal + '"]');
+    }
+    
 
     
     //way to reorder things
