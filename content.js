@@ -55,3 +55,8 @@ $(function() {
         $('div[data-asin="' + dataAsin[i] + '"]').insertBefore('div[data-asin="' + firstDataAsinVal + '"]');
     }
 });
+/*
+    TO-DO
+        -add a button in chrome extension for the option to turn off/on the feature
+        -add icons
+*/
