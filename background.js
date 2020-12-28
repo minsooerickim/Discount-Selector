@@ -1,1 +1,1 @@
-console.log('back running')
+console.log('background script')

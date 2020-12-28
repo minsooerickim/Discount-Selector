@@ -54,9 +54,4 @@ $(function() {
     for (var i = items.length - 1; i >= 0; i--) {
         $('div[data-asin="' + dataAsin[i] + '"]').insertBefore('div[data-asin="' + firstDataAsinVal + '"]');
     }
-    
-
-    
-    //way to reorder things
-    //$('div[data-index="3"]').insertBefore('div[data-index="' + topItemIndex + '"]');
 });
