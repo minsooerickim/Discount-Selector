@@ -1,2 +1,2 @@
 # Discount-Selector
- shows you items with the biggest discount
+ reorders amazon items with highest discount to lowest!
