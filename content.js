@@ -1,4 +1,7 @@
 $(function() {
+    $('#button').click(function(){
+        console.log('button test');
+    });
     //original/b4-discount items' prices
     var items = [];
     i = 0;
@@ -21,28 +24,28 @@ $(function() {
         currentPrice[j++] = $(this).parent().prev('span.a-price').find('span.a-offscreen').text();
         dataAsin[k++] = $(this).parents('div[data-asin]').attr('data-asin');
     });
-
+    
+    //getting rid of duplicate items
+    /*
+    seeing duplicates
     dataAsin.forEach((c, index) => {
         console.log(`${c} - ${index} - ${dataAsin.indexOf(c)}`);
     });
-    console.log(dataAsin);
-    /*
-    //getting rid of duplicate items
+    */
     var indexOf = [];
     q = 0;
     dataAsin.forEach((c, index) => {
         indexOf[q++] = (`${dataAsin.indexOf(c)}`);
     });
-    console.log(indexOf)
     for (var i = 0; i < items.length; i++) {
         if (i != indexOf[i]) {
-            data.splice(i, 1);
+            dataAsin.splice(i, 1);
             items.splice(i, 1);
             currentPrice.splice(i, 1);
         }
     }
-    console.log(dataAsin);
-*/
+
+    /* (another way of getting rid of duplicates)
     Array.prototype.getDuplicates = function () {
         var duplicates = {};
         for (var i = 0; i < this.length; i++) {
@@ -55,39 +58,9 @@ $(function() {
     
         return duplicates;
     };
-    var dupes = [];
-    var dupesLength = [];
-    var dupeValues = [];
-    p = 0;
     var duplicates = dataAsin.getDuplicates();
     console.log(duplicates);
-    for(var prop in duplicates) {
-        dupes[p++] = (prop, duplicates[prop]);
-        dupesLength[p++] = duplicates[prop].length;
-        if (duplicates[prop].length  == 2) {
-            dupeValues[p] = duplicates[prop][duplicates[prop].length - 1]
-            dataAsin.splice((dupeValues[p]), 1);
-            p+=1;
-        }
-        else {
-            var length = duplicates[prop].length;
-            while (length != 1) {
-                dupeValues[p] = duplicates[prop][length- 1];
-                dataAsin.splice(dupeValues[p], 1)
-                p+=1;
-                length -= 1;
-            }
-        }
-    }
-    console.log(dataAsin);
-    console.log(dupes);
-    console.log(dupesLength);
-    console.log(dupeValues);
-    //for (var i = 0; i < dupes.length; i++) {
-    //    if (dupesLength[i] == 2) {
-    //        dataAsin.slice(duplicates[prop])
-    //    }
-    //}
+    */
 
     //getting price diff list
     for (var i = 0; i < items.length; i++) {
@@ -110,16 +83,8 @@ $(function() {
     });
     
     reverseSortedPriceDiff = sortedPriceDiff.reverse();
-    /*
-    console.log(items);
-    console.log(currentPrice);
-    console.log(dataAsin);
-    console.log(priceDiff);
-    console.log(intOrgPrice);
-    console.log(intDiscPrice);
-    console.log(sortedPriceDiff);
-    console.log(reverseSortedPriceDiff);
-    */
+ 
+
     var l = (document.getElementsByClassName('sg-col-4-of-12')[1]);
     var firstDataAsinVal = l.getAttribute('data-asin');
 
@@ -134,14 +99,15 @@ $(function() {
     for (var i = 0; i < reverseSortedPriceDiff.length; i++) {
         moveIndexPos[z++] = reverseSortedPriceDiff.indexOf(priceDiff[i]);
     }
-    console.log(moveIndexPos);
-    /*
-    //putting them according to moveIndexPos
+
+    
+    /* (unsucessful lol)
+    putting them according to moveIndexPos
     for (var i = 0; i < items.length; i++) {
-        $('div[data-asin="' + dataAsin[i] + '"]').insertBefore('div[data-asin="' + (moveIndexPos[i] + 1) + '"]');
-        $('div[data-asin="' + dataAsin[i] + '"]').insertBefore('div[data-asin="' + firstDataAsinVal + '"]');
+        $('div[data-asin="' + dataAsin[i] + '"]').insertBefore('div[data-asin="' + dataAsin[(moveIndexPos[i]+1)] + '"]');
     }
     */
+    
     /*
     for (var i = 0; i < items.length; i++) {
         if ()
