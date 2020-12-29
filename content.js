@@ -114,8 +114,3 @@ $(function() {
     }
     */
 });
-/*
-    TO-DO
-        -add a button in chrome extension for the option to turn off/on the feature
-        -add icons
-*/
