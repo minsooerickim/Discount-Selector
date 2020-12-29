@@ -2,6 +2,7 @@
 {
     "manifest_version": 2,
     "name": "Discount Selector",
+    "description": "Brings all discounted items up to the top and gets rid of duplicate listings (usually ads)",
     "version": "0.0.1",
     "content_scripts": [
         {
